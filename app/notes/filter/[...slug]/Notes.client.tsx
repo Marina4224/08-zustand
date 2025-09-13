@@ -5,21 +5,20 @@ import NoteList from "@/components/NoteList/NoteList";
 import { useState, useEffect } from "react";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { fetchNotes } from "@/lib/api";
 import { useDebounce } from "use-debounce";
+import Link from "next/link";
 
 interface NotesClientProps {
-  tag?: string;
+  tag?: string; 
 }
 
+
 export default function NotesClient({ tag }: NotesClientProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
   const [debouncedSearch] = useDebounce(searchTerm, 500);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -32,8 +31,8 @@ export default function NotesClient({ tag }: NotesClientProps) {
     placeholderData: keepPreviousData,
   });
 
-  const notes = data?.notes || [];
-  const totalPages = data?.totalPages || 1;
+  const notes = data?.notes ?? [];
+  const totalPages = data?.totalPages ?? 1;
 
   return (
     <div className={css.app}>
@@ -46,21 +45,15 @@ export default function NotesClient({ tag }: NotesClientProps) {
             onPageChange={setCurrentPage}
           />
         )}
-        <button className={css.button} onClick={() => setIsModalOpen(true)}>
+        <Link href="/notes/action/create" className={css.button}>
           Create note +
-        </button>
+        </Link>
       </header>
 
       {isLoading && <p>Loading notes...</p>}
       {error && <p>Error loading notes</p>}
 
-      {notes.length > 0 && <NoteList notes={notes} />}
-
-      {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
-          <NoteForm onSuccess={() => setIsModalOpen(false)} />
-        </Modal>
-      )}
+      {notes.length > 0 ? <NoteList notes={notes} /> : !isLoading && <p>No notes found</p>}
     </div>
   );
 }

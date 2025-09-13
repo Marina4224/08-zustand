@@ -10,6 +10,28 @@ type Props = {
   params: Promise<{ slug: string[] }>;
 };
 
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  const tag = slug[0];
+    return {
+        title: 'Notes filtered by: ${tag}',
+        description: 'Browse notes filtered by category: ${tag}',
+        openGraph: {
+            title: 'Notes filtered by: ${tag}',
+            description: `Browse notes filtered by category: ${tag}`,
+            url: `https://notehub.versel.app/notes/filter/${tag}`,
+            images: [
+                {
+                    url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+                    width: 1200,
+                    height: 630,
+                    alt: `Filter ${tag}`,
+                },],
+        }
+    }
+}
+
+
 export default async function NotesPage({ params }: Props) {
   const { slug } = await params;
   const queryClient = new QueryClient();

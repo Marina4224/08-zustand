@@ -15,11 +15,9 @@ export default function Modal({ children, onClose }: ModalProps) {
 
     window.addEventListener("keydown", handleEscape);
 
-    // блокуємо скрол
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    // при анмаунті прибираємо все
     return () => {
       window.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = originalOverflow;
