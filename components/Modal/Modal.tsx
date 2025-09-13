@@ -35,9 +35,7 @@ export default function Modal({ children, onClose }: ModalProps) {
         if (e.target === e.currentTarget) onClose(); // закриваємо тільки якщо клік саме по бекдропу
       }}
     >
-      <div className={css.modal}>
-        {children}
-      </div>
+      <div className={css.modal}>{children}</div>
     </div>,
     document.body
   );

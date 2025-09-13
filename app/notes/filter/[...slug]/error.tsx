@@ -1,4 +1,3 @@
-
 "use client";
 
 export default function NotesError({ error }: { error: Error }) {

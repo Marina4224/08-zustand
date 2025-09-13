@@ -6,7 +6,7 @@ const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
 const api = axios.create({
   baseURL: BASE_URL,
-  headers: {Authorization: `Bearer ${token}`},
+  headers: { Authorization: `Bearer ${token}` },
 });
 
 export interface FetchNotesResponse {
@@ -26,13 +26,10 @@ export async function fetchNotes(
 
   const response = await api.get<FetchNotesResponse>("/notes", { params });
   return response.data;
-  
-  }
+}
 export type CreateNoteInput = Omit<Note, "id" | "createdAt" | "updatedAt">;
 
-export async function createNote(
-  note: CreateNoteInput
-): Promise<Note> {
+export async function createNote(note: CreateNoteInput): Promise<Note> {
   const response = await api.post<Note>("/notes", note);
   return response.data;
 }
@@ -42,7 +39,7 @@ export async function deleteNote(id: string): Promise<Note> {
   return response.data;
 }
 
-export async function fetchNoteById(id: Note['id']): Promise<Note> {
-    const response = await api.get<Note>(`/notes/${id}`);
+export async function fetchNoteById(id: Note["id"]): Promise<Note> {
+  const response = await api.get<Note>(`/notes/${id}`);
   return response.data;
-    }
+}

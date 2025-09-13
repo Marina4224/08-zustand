@@ -66,7 +66,13 @@ export default function NoteForm({ onSuccess }: NoteFormProps) {
 
         <div className={css.formGroup}>
           <label htmlFor="content">Content</label>
-          <Field as="textarea" id="content" name="content" rows={8} className={css.textarea} />
+          <Field
+            as="textarea"
+            id="content"
+            name="content"
+            rows={8}
+            className={css.textarea}
+          />
           <ErrorMessage name="content" component="span" className={css.error} />
         </div>
 
@@ -86,10 +92,13 @@ export default function NoteForm({ onSuccess }: NoteFormProps) {
           <button type="submit" className={css.submitButton}>
             Create note
           </button>
-            <button
-    type="button" className={css.cancelButton} onClick={onSuccess}>
-    Cancel
-  </button>
+          <button
+            type="button"
+            className={css.cancelButton}
+            onClick={onSuccess}
+          >
+            Cancel
+          </button>
         </div>
       </Form>
     </Formik>

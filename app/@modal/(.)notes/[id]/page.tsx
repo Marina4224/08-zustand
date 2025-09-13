@@ -8,7 +8,7 @@ import {
 import PreviewModal from "./NotePreview.client";
 
 type Props = {
-  params: Promise <{ id: string }>;
+  params: Promise<{ id: string }>;
 };
 export default async function NotePreview({ params }: Props) {
   const queryClient = new QueryClient();

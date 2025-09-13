@@ -3,7 +3,6 @@ import css from "./SidebarNotes.module.css";
 import type { NoteTag } from "@/types/note";
 
 export default async function SidebarNotes() {
- 
   const tags: NoteTag[] = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
   return (
     <ul className={css.menuList}>

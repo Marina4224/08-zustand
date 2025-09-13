@@ -12,7 +12,7 @@ import { fetchNotes } from "@/lib/api";
 import { useDebounce } from "use-debounce";
 
 interface NotesClientProps {
-  tag?: string; 
+  tag?: string;
 }
 
 export default function NotesClient({ tag }: NotesClientProps) {
@@ -21,7 +21,6 @@ export default function NotesClient({ tag }: NotesClientProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [debouncedSearch] = useDebounce(searchTerm, 500);
 
-  
   useEffect(() => {
     setCurrentPage(1);
   }, [debouncedSearch, tag]);
@@ -30,7 +29,7 @@ export default function NotesClient({ tag }: NotesClientProps) {
     queryKey: ["notes", currentPage, debouncedSearch, tag],
     queryFn: () => fetchNotes(currentPage, 12, debouncedSearch, tag),
     refetchOnMount: false,
-		placeholderData: keepPreviousData,
+    placeholderData: keepPreviousData,
   });
 
   const notes = data?.notes || [];
